@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-require "twitteroauth/twitteroauth/twitteroauth.php";
 require "keys.php";
 require "historicalcat.php";
 
@@ -10,7 +9,7 @@ HistoricalCat::$db_info = array(
     "pass" => DBPASS
 );
 
-HistoricalCat::$twitterInfo = array(
+HistoricalCat::$twitter_info = array(
     "consumer_key" => TWIT_CONSUMER_KEY,
     "consumer_secret" => TWIT_CONSUMER_SECRET,
     "access_token" => TWIT_ACCESS_TOKEN,

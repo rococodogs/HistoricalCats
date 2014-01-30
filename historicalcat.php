@@ -55,7 +55,7 @@ class HistoricalCat {
     public static $tweetThreshold = 100;
 
     // twitter info for posting
-    public static $twitterInfo = array(
+    public static $twitter_info = array(
         "consumer_key" => "",
         "consumer_secret" => "",
         "access_token" => "",
@@ -101,15 +101,13 @@ class HistoricalCat {
 
             $cat = $nextPass['docs'][0];
 
-            if ( self::$db_storage && !empty(self::$db_info) ) {
-
-                if ( !$this->canHaz($cat['id']) ) {
-                    $purr = false;
-                }
+            if ( self::$db_storage ) {
+                $purr = $this->canHaz($cat['id']);
 
             } else {
                 $purr = true;
             }
+
         }
 
         $this->cat = array(
@@ -216,17 +214,21 @@ class HistoricalCat {
                  . $this->buildDPLAUrl($this->cat['id'])
                  ;
         
+        if ( self::$db_storage ) {
+            $this->querydb("insert into `tweets`(id, tweet) values(:id, :tweet)", array("id" => $this->cat['id'], "tweet" => $message), $error);
+        }
+
         if ( self::$tweet ) {
-            require "twitteroauth/twitteroauth/twitteroauth.php";
+            require "./twitteroauth/twitteroauth/twitteroauth.php";
 
             $chirp = new TwitterOAuth(
-                self::$twitterInfo['consumer_key'],
-                self::$twitterInfo['consumer_secret'],
-                self::$twitterInfo['access_token'],
-                self::$twitterInfo['access_secret']
+                self::$twitter_info['consumer_key'],
+                self::$twitter_info['consumer_secret'],
+                self::$twitter_info['access_token'],
+                self::$twitter_info['access_secret']
             );
 
-            $post = $chirp->post('statuses/update', array('status' => $tweet));
+            $post = $chirp->post('statuses/update', array('status' => $message));
 
             return $post ? true : false;
         
@@ -295,11 +297,11 @@ class HistoricalCat {
      *
      */
 
-    private function canHaz($id) {
+    public function canHaz($id) {
         $query = "select * from tweets where id = :id";
         $res = $this->querydb($query, array("id" => $id), $error);
 
-        if ( $error ) { return $error; }
+        //if ( $error ) { return $error; }
 
         return count($res) > 0 ? false : true;
     }
@@ -335,7 +337,7 @@ class HistoricalCat {
      */
 
     private function querydb($query, $values = array(), &$errors = null) {
-        $pdo = new PDO($db_info['info'], $db_info['user'], $db_info['pass']);
+        $pdo = new PDO(self::$db_info['info'], self::$db_info['user'], self::$db_info['pass']);
         $stmt = $pdo->prepare($query);
         $stmt->execute($values);
 
