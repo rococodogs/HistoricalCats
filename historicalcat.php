@@ -9,6 +9,8 @@
  *  tweet format:
  *  [opening phrase ($catPhrases)]. [title of dpla record]. [link to dpla entry]
  *
+ *  @author Adam Malantonio, January 2014.
+ *  
  */
 
 class HistoricalCat {
