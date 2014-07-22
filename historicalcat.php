@@ -210,7 +210,7 @@ class HistoricalCat {
         $message = $this->cat['intro']
                  . " "
                  . (strlen($this->cat['title']) > self::$tweetThreshold ? 
-                        substr($this->cat['title'], 0, self::$tweetThreshold) . "&#8230;" . "\""
+                        substr($this->cat['title'], 0, self::$tweetThreshold) . "…" . "\""
                       : $this->cat['title'])
                  . " "
                  . $this->buildDPLAUrl($this->cat['id'])
@@ -221,7 +221,7 @@ class HistoricalCat {
         }
 
         if ( self::$TWEET) {
-            require "./twitteroauth/twitteroauth/twitteroauth.php";
+            require "twitteroauth/twitteroauth/twitteroauth.php";
 
             $chirp = new TwitterOAuth(
                 self::$twitter_info['consumer_key'],
@@ -353,5 +353,3 @@ class HistoricalCat {
     }
 
 }
-
-?>
