@@ -43,7 +43,7 @@ class HistoricalCat {
 
     // an option to write tweets to a database and prevent repeat tweets
     // ( db connector is PDO, so use those credentials! )
-    public static $db_storage = true;
+    public static $USE_DB = true;
     public static $db_info = array(
         "info" => "",
         "user" => "",
@@ -51,7 +51,7 @@ class HistoricalCat {
     );
 
     // an option to turn off tweeting (helpful for debugging)
-    public static $tweet = true;
+    public static $TWEET = true;
 
     // number of chars to cut off a title at
     public static $tweetThreshold = 100;
@@ -71,7 +71,7 @@ class HistoricalCat {
      *  a) does a first-pass search of the DPLA api to retrieve a count of the results
      *  b) conducts a second search using the aforementioned count in generating a random
      *     page of results
-     *     1) if $db_storage is turned on, we'll see if this id has found its way into the
+     *     1) if $USE_DB is turned on, we'll see if this id has found its way into the
      *        database, and if so, we'll start the search again
      *  c) reduce the multitude of information into the 3 items needed (plus choose a random
      *     entry from the catPhrases array)
@@ -103,7 +103,7 @@ class HistoricalCat {
 
             $cat = $nextPass['docs'][0];
 
-            if ( self::$db_storage ) {
+            if ( self::$USE_DB ) {
                 $purr = $this->canHaz($cat['id']);
 
             } else {
@@ -216,11 +216,11 @@ class HistoricalCat {
                  . $this->buildDPLAUrl($this->cat['id'])
                  ;
         
-        if ( self::$db_storage ) {
+        if ( self::$USE_DB ) {
             $this->querydb("insert into `tweets`(id, tweet) values(:id, :tweet)", array("id" => $this->cat['id'], "tweet" => $message), $error);
         }
 
-        if ( self::$tweet ) {
+        if ( self::$TWEET) {
             require "./twitteroauth/twitteroauth/twitteroauth.php";
 
             $chirp = new TwitterOAuth(
