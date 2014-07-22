@@ -270,7 +270,7 @@ class HistoricalCat {
              . $options['field'] . "=" . $this->query
              . "&page_size=" . $options['page_size']
              . "&page=" . $options['page']
-             . urlencode("&type[]=") . $options['type']
+             . "&sourceResource.type=" . $options['type']
              . "&api_key=" . $this->dplakey
              ;
 
