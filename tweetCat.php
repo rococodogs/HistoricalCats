@@ -16,6 +16,9 @@ HistoricalCat::$twitter_info = array(
     "access_secret" => TWIT_ACCESS_SECRET
 );
 
+/* easy switches for debugging */
+// HistoricalCat::$TWEET = false;
+// HistoricalCat::$USE_DB = false;
+
 $cat = new HistoricalCat(DPLAKEY);
 $cat->meow();
-?>
