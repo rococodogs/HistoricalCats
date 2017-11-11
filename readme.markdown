@@ -1,6 +1,8 @@
 [@HistoricalCats][twitter]
 ==========================
 
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/historical-cats)
+
 the code that runs a bot tweeting random cat-related items in the
 [Digital Public Library of America][dpla]. this is a rewrite of
 the original PHP code written in 2014 at [LibHack] in Philadelphia.
