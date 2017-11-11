@@ -6,15 +6,19 @@ const randomItem = require('./lib/random-dpla-item')
 const createTweet = require('./lib/create-tweet')
 const blacklist = require('./lib/blacklist').openSync('./.data/blacklist.json')
 
-const api_key = process.env.DPLA_KEY
-const SECRET = process.env.SECRET_TOKEN
-
 const {
+  DPLA_KEY,
+
   TWITTER_CONSUMER_KEY,
   TWITTER_CONSUMER_SECRET,
   TWITTER_ACCESS_TOKEN,
   TWITTER_ACCESS_SECRET
+
+  SECRET_TOKEN_HEADER,
+  SECRET_TOKEN_VALUE,
 } = process.env
+
+const secretHeader = SECRET_TOKEN_HEADER || 'x-tweet-me-maybe'
 
 const twitterClient = new Twitter({
   consumer_key: TWITTER_CONSUMER_KEY,
@@ -30,17 +34,20 @@ app.get('/', (req, res) => {
 })
 
 app.post('/tweet', (req, res) => {
-  const header = req.get('x-tweet-me-maybe')
 
-  if (!header || header !== SECRET) {
-    res.status(401)
-    return res.json({
-      error: 'unauthorized',
-      message: 'sorry friend, only authorized users plz',
-    })
+  if (secretHeader) {
+    const header = req.get(secretHeader)
+
+    if (!header || header !== SECRET_TOKEN_VALUE) {
+      res.status(401)
+      return res.json({
+        error: 'unauthorized',
+        message: 'sorry friend, only authorized users plz',
+      })
+    }
   }
 
-  randomItem(query, {blacklist, api_key})
+  randomItem(query, {blacklist, api_key: DPLA_KEY})
     .then(createTweet)
     .then(postToTwitter)
     .then(tweet => res.json({status: 'success', tweet}))
