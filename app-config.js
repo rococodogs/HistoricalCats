@@ -22,4 +22,6 @@ module.exports = {
   ],
 
   item_title_max_length: 100,
+
+  max_stored_entries: 1000,
 }
