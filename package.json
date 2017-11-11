@@ -7,12 +7,23 @@
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "dpla",
+    "twitter-bot",
+    "glitch"
+  ],
   "author": "Adam Malantonio <adam.malantonio@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.2",
     "r2": "^2.0.0",
     "twitter": "^1.7.1"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/malantonio/HistoricalCats"
   }
 }
