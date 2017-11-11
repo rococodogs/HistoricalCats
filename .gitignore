@@ -1,1 +1,4 @@
-keys.php
+node_modules
+.env
+.data
+blacklist-cache.json
