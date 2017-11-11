@@ -12,7 +12,7 @@ const {
   TWITTER_CONSUMER_KEY,
   TWITTER_CONSUMER_SECRET,
   TWITTER_ACCESS_TOKEN,
-  TWITTER_ACCESS_SECRET
+  TWITTER_ACCESS_SECRET,
 
   SECRET_TOKEN_HEADER,
   SECRET_TOKEN_VALUE,
@@ -29,9 +29,7 @@ const twitterClient = new Twitter({
 
 const postToTwitter = status => twitterClient.post('statuses/update', {status})
 
-app.get('/', (req, res) => {
-  res.json({status: '🐈'})
-})
+app.use(express.static('./public'))
 
 app.post('/tweet', (req, res) => {
 
