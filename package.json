@@ -1,0 +1,18 @@
+{
+  "name": "historical-cats",
+  "version": "2.0.0",
+  "description": "rewrite of @HistoricalCats twitter bot as a glitch app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Adam Malantonio <adam.malantonio@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "r2": "^2.0.0",
+    "twitter": "^1.7.1"
+  }
+}
