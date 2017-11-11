@@ -21,7 +21,7 @@
     "twitter": "^1.7.1"
   },
   "engines": {
-    "node": "8.x"
+    "node": "8.6.*"
   },
   "repository": {
     "url": "https://github.com/malantonio/HistoricalCats"
