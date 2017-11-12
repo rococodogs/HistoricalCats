@@ -22,25 +22,27 @@ as possible. After cloning / remixing:
   to keep track of so your bot doesn't run the risk of posting the same
   thing.
 
-Note, these files also contain this information + more in their respective
+note, these files also contain this information + more in their respective
 comments.
 
 
 getting it to tweet
 -------------------
 
-sending a tweet is a matter of sending a `POST` request to the server with the
-header provided.
+so, this is a little annoying, but in order for this bot to tweet, you have
+to poke it by means of a `POST` request with a special header. this is so
+visitors to your endpoint don't cause your bot to get flagged by twitter and/or
+dpla. the beauty of this glitch thing is that you can easily rewrite the stuff in
+`server.js` to trigger a tweet whenever you want!
+
+I have a cron job scheduled to send a `curl` request to this app with the 
+special header running 3 times a day from a linode server.
 
 so if, say, `process.env.SECRET_TOKEN_VALUE === 'hi there! ^_^`, then:
 
 ```
-curl \
--X POST \
--H "x-tweet-me-maybe: hi there! ^_^" \
-https://yr-app-here.glitch.com/tweet
+curl -X POST -H "x-tweet-me-maybe: hi there! ^_^" https://yr-app-here.glitch.com/tweet
 ```
-
 
 would trigger a tweet.
 
