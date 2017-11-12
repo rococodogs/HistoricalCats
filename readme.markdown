@@ -46,6 +46,10 @@ curl -X POST -H "x-tweet-me-maybe: hi there! ^_^" https://yr-app-here.glitch.com
 
 would trigger a tweet.
 
+you can also use a third-party server-checking service to poke yr app! see
+the handy [glitch/twitterbot][twitterbot-glitch] project for suggestions
++ tips!
+
 
 questions?
 ----------
@@ -58,3 +62,4 @@ leave an [issue] or [tweet me][my-twitter].
 [dpla-key]: https://dp.la/info/developers/codex/policies/#get-a-key
 [issue]: https://github.com/malantonio/HistoricalCats/issues
 [my-twitter]: https://twitter.com/afrmalantonio
+[twitterbot-glitch]: https://glitch.com/edit/#!/twitterbot
